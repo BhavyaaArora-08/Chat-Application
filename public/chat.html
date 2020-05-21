@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+
+    <title>Chat App</title>
+  </head>
+  <body>
+    <div class="chat-container">
+      <header class="chat-header">
+        <h1><i class="fas fa-smile"></i> ChatCord</h1>
+        <a href="index.html" class="btn">Leave Room</a>
+      </header>
+      <main class="chat-main">
+        <div class="chat-sidebar">
+          <div id="sidebar"></div>
+        </div>
+        <!-- <div id="msg-container"> -->
+        <div
+          style="overflow: auto; max-height: 400px;"
+          id="chat-messages"
+        ></div>
+        <!-- </div> -->
+      </main>
+      <div class="chat-form-container">
+        <form id="form">
+          <input
+            id="msg"
+            type="text"
+            placeholder="Enter Message"
+            required
+            autocomplete="off"
+          />
+          <button id="msgB" class="btn">
+            <i class="fas fa-paper-plane"></i> Send
+          </button>
+          <button class="btn" id="sendLocation">L</button>
+        </form>
+      </div>
+    </div>
+
+    <script id="message-template" type="text/html">
+      <div style="color:#3a458b; margin:15px;  border:1px solid #3a458b; border-radius:4px;">
+        <p style="padding:10px; border-radius:2px; margin:5px; ">
+          <span style="font-weight: 900;"> {{name}} </span>
+          <span style="margin-left:5px; color:gray;" >{{time}}</span>
+        </p>
+        <p style="padding:15px; border-radius:2px; margin:5px; background:#667aff7e;"> {{msg}} </p>
+      </div>
+    </script>
+
+    <script id="location-template" type="text/html">
+      <div style="color:#3a458b; margin:15px;  border:1px solid #3a458b; border-radius:4px;">
+        <p style="padding:10px; border-radius:2px; margin:5px; ">
+          <span style="font-weight: 900;"> {{name}} </span>
+          <span style="margin-left:5px; color:gray;" >{{time}}</span>
+        </p>
+        <p style="padding:15px; border-radius:2px; margin:5px; background:#667aff7e;"> <a href="{{href}}"> View Location </a></p>
+      </div>
+    </script>
+
+    <script id="sidebar-template" type="text/html">
+      <h3><i class="fas fa-comments"></i> Room Name:</h3>
+          <h2 id="room-name">{{room}}</h2>
+          <h3><i class="fas fa-users"></i> Users</h3>
+      <ul>
+        {{#users}}
+          <li>{{username}}</li>
+        {{/users}}
+      </ul>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+
+    <!-- this is accessible to the client -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="/js/chat.js"></script>
+  </body>
+</html>
