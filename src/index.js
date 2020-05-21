@@ -96,12 +96,13 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     const user = removeUser(socket.conn.id);
     if (user) {
-      socket.broadcast
-        .to(user.room)
-        .emit(
-          "message",
-          generateMessage({ text: `${user.username} has left the chat` })
-        );
+      socket.broadcast.to(user.room).emit(
+        "message",
+        generateMessage({
+          username: "Admin",
+          text: `${user.username} has left the chat`,
+        })
+      );
 
       io.to(user.room).emit("roomData", {
         room: user.room,
